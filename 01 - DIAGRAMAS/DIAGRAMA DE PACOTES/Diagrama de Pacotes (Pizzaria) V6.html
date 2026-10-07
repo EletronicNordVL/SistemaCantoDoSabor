@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Diagrama de Pacotes V6 — Arquitetura Pizzaria</title>
+<style>
+  body { background:#f8f9fa; display:flex; justify-content:center; padding:20px; font-family: 'Segoe UI', Arial, sans-serif; }
+  .wrapper { background:#fff; border:1px solid #ddd; padding:30px; border-radius:8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+</style>
+</head>
+<body>
+<div class="wrapper">
+<svg width="960" height="920" viewBox="0 0 960 920" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="dep" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0,10 3.5,0 7" fill="#444"/>
+    </marker>
+  </defs>
+
+  <rect x="20" y="40" width="920" height="200" fill="none" stroke="#01579b" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="35" y="35" font-weight="bold" fill="#01579b" font-size="16">Camada de Interface (Apresentação)</text>
+  
+  <g transform="translate(50,80)">
+    <rect x="0" y="0" width="160" height="15" fill="#e1f5fe" stroke="#01579b"/>
+    <rect x="0" y="15" width="160" height="80" fill="#fff" stroke="#01579b"/>
+    <text x="80" y="60" text-anchor="middle" font-size="12" font-weight="600">Tela de Vendas</text>
+    <text x="80" y="75" text-anchor="middle" font-size="10" fill="#666">(Terminal PDV)</text>
+  </g>
+
+  <g transform="translate(275,80)">
+    <rect x="0" y="0" width="160" height="15" fill="#e1f5fe" stroke="#01579b"/>
+    <rect x="0" y="15" width="160" height="80" fill="#fff" stroke="#01579b"/>
+    <text x="80" y="60" text-anchor="middle" font-size="12" font-weight="600">Gestão de Cardápio</text>
+    <text x="80" y="75" text-anchor="middle" font-size="10" fill="#666">(Produtos/Preços)</text>
+  </g>
+
+  <g transform="translate(500,80)">
+    <rect x="0" y="0" width="160" height="15" fill="#e1f5fe" stroke="#01579b"/>
+    <rect x="0" y="15" width="160" height="80" fill="#fff" stroke="#01579b"/>
+    <text x="80" y="60" text-anchor="middle" font-size="12" font-weight="600">Painel do Carlos</text>
+    <text x="80" y="75" text-anchor="middle" font-size="10" fill="#666">(Relatórios/Auditoria)</text>
+  </g>
+
+  <g transform="translate(725,80)">
+    <rect x="0" y="0" width="160" height="15" fill="#e1f5fe" stroke="#01579b"/>
+    <rect x="0" y="15" width="160" height="80" fill="#fff" stroke="#01579b"/>
+    <text x="80" y="60" text-anchor="middle" font-size="12" font-weight="600">Módulo Contador</text>
+  </g>
+
+  <rect x="20" y="340" width="920" height="280" fill="none" stroke="#fbc02d" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="35" y="330" font-weight="bold" fill="#f57f17" font-size="16">Camada de Negócio (Lógica do Sistema)</text>
+
+  <g transform="translate(50,400)">
+    <rect x="0" y="0" width="180" height="15" fill="#fff9c4" stroke="#fbc02d"/>
+    <rect x="0" y="15" width="180" height="100" fill="#fff" stroke="#fbc02d"/>
+    <text x="90" y="55" text-anchor="middle" font-size="12" font-weight="600">Processamento Pedidos</text>
+    <text x="90" y="75" text-anchor="middle" font-size="10" fill="#777">«Core Business»</text>
+    <text x="90" y="95" text-anchor="middle" font-size="9" fill="#d32f2f">RF01, RF03</text>
+  </g>
+
+  <g transform="translate(265,400)">
+    <rect x="0" y="0" width="180" height="15" fill="#fff9c4" stroke="#fbc02d"/>
+    <rect x="0" y="15" width="180" height="100" fill="#fff" stroke="#fbc02d"/>
+    <text x="90" y="60" text-anchor="middle" font-size="12" font-weight="600">Catálogo de Produtos</text>
+    <text x="90" y="85" text-anchor="middle" font-size="10" fill="#777">RN03 / RF02</text>
+  </g>
+
+  <g transform="translate(480,400)">
+    <rect x="0" y="0" width="180" height="15" fill="#fff9c4" stroke="#fbc02d"/>
+    <rect x="0" y="15" width="180" height="100" fill="#fff" stroke="#fbc02d"/>
+    <text x="90" y="55" text-anchor="middle" font-size="12" font-weight="600">Análise Financeira</text>
+    <text x="90" y="75" text-anchor="middle" font-size="10" fill="#777">RN04, RN08</text>
+    <text x="90" y="95" text-anchor="middle" font-size="9" fill="#d32f2f">RF05, RF10</text>
+  </g>
+
+  <g transform="translate(695,400)">
+    <rect x="0" y="0" width="210" height="15" fill="#f3e5f5" stroke="#7b1fa2"/>
+    <rect x="0" y="15" width="210" height="100" fill="#fff" stroke="#7b1fa2"/>
+    <text x="105" y="55" text-anchor="middle" font-size="12" font-weight="600">Segurança & Auditoria</text>
+    <text x="105" y="75" text-anchor="middle" font-size="10" fill="#7b1fa2">Controle Acesso (RN06)</text>
+    <text x="105" y="95" text-anchor="middle" font-size="10" fill="#7b1fa2">Integração Delivery</text>
+  </g>
+
+  <rect x="20" y="680" width="920" height="200" fill="none" stroke="#388e3c" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="35" y="670" font-weight="bold" fill="#388e3c" font-size="16">Camada de Persistência (Dados)</text>
+
+  <g transform="translate(50,730)">
+    <rect x="0" y="0" width="160" height="15" fill="#e8f5e9" stroke="#388e3c"/>
+    <rect x="0" y="15" width="160" height="90" fill="#fff" stroke="#388e3c"/>
+    <text x="80" y="65" text-anchor="middle" font-size="12">Banco de Dados</text>
+  </g>
+
+  <g transform="translate(275,730)">
+    <rect x="0" y="0" width="160" height="15" fill="#e8f5e9" stroke="#388e3c"/>
+    <rect x="0" y="15" width="160" height="90" fill="#fff" stroke="#388e3c"/>
+    <text x="80" y="65" text-anchor="middle" font-size="12">DB de Produtos</text>
+  </g>
+
+  <g transform="translate(500,730)">
+    <rect x="0" y="0" width="160" height="15" fill="#e8f5e9" stroke="#388e3c"/>
+    <rect x="0" y="15" width="160" height="90" fill="#fff" stroke="#388e3c"/>
+    <text x="80" y="65" text-anchor="middle" font-size="12">Logs de Alteração</text>
+  </g>
+
+  <g transform="translate(725,730)">
+    <rect x="0" y="0" width="160" height="15" fill="#e8f5e9" stroke="#388e3c"/>
+    <rect x="0" y="15" width="160" height="90" fill="#fff" stroke="#388e3c"/>
+    <text x="80" y="65" text-anchor="middle" font-size="12">Serviço de Backup</text>
+  </g>
+
+  <path d="M 130 175 L 130 390" fill="none" stroke="#444" stroke-dasharray="5,5" marker-end="url(#dep)"/>
+  <path d="M 355 175 L 355 390" fill="none" stroke="#444" stroke-dasharray="5,5" marker-end="url(#dep)"/>
+  <path d="M 580 175 L 580 390" fill="none" stroke="#444" stroke-dasharray="5,5" marker-end="url(#dep)"/>
+  <path d="M 805 175 L 805 320 L 780 320 L 780 390" fill="none" stroke="#444" stroke-dasharray="5,5" marker-end="url(#dep)"/>
+
+  <path d="M 130 515 L 130 720" fill="none" stroke="#444" stroke-dasharray="5,5" marker-end="url(#dep)"/>
+  <path d="M 355 515 L 355 720" fill="none" stroke="#444" stroke-dasharray="5,5" marker-end="url(#dep)"/>
+  <path d="M 580 515 L 580 720" fill="none" stroke="#444" stroke-dasharray="5,5" marker-end="url(#dep)"/>
+  <path d="M 800 515 L 800 650 L 805 650 L 805 720" fill="none" stroke="#444" stroke-dasharray="5,5" marker-end="url(#dep)"/>
+
+</svg>
+</div>
+</body>
+</html>

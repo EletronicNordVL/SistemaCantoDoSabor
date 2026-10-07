@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagrama de Casos de Uso v5.0 — Pizzaria Canto do Sabor</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Sora:wght@300;400;600;700&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:#0f0e0c;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:40px 20px 60px;
+    font-family:'Sora',sans-serif;
+  }
+  .header { text-align:center; margin-bottom:32px; }
+  .header h1 {
+    font-family:'JetBrains Mono',monospace;
+    color:#f5f0e8; font-size:1rem;
+    letter-spacing:.25em; text-transform:uppercase; margin-bottom:8px;
+  }
+  .header p { font-size:.8rem; color:#6b5e4e; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; }
+  .wrapper {
+    background:#141210;
+    border:1px solid #2a2318;
+    border-radius:16px;
+    padding:32px;
+    box-shadow:0 0 120px rgba(196,142,60,.06);
+    overflow-x:auto;
+    width:100%;
+    max-width:1100px;
+  }
+  .legend {
+    margin-top:28px; display:flex; flex-wrap:wrap;
+    gap:20px; justify-content:center;
+  }
+  .legend-item {
+    display:flex; align-items:center; gap:8px;
+    font-size:.73rem; color:#8a7a66; font-family:'JetBrains Mono',monospace;
+  }
+  .lb { width:32px; height:4px; border-radius:2px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>// Diagrama de Casos de Uso — v5.0</h1>
+  <p>Sistema de Gestão Financeira — Pizzaria "Canto do Sabor" &nbsp;|&nbsp; UML 2.x</p>
+</div>
+
+<div class="wrapper">
+<svg width="1040" height="1060" viewBox="0 0 1040 1060" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <marker id="as" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0,8 3,0 6" fill="#8a7a66"/>
+  </marker>
+  <marker id="inc" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0,8 3,0 6" fill="#c48e3c"/>
+  </marker>
+  <marker id="ext" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0,8 3,0 6" fill="#6aaa6a"/>
+  </marker>
+</defs>
+
+<!-- FUNDO -->
+<rect x="6" y="6" width="1028" height="1048" rx="12" fill="#141210" stroke="#2a2318" stroke-width="1.5"/>
+
+<!-- título -->
+<rect x="300" y="14" width="440" height="26" rx="6" fill="#1e1a14"/>
+<text x="520" y="32" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#c48e3c" letter-spacing="1">Pizzaria "Canto do Sabor" — Gestão Financeira</text>
+
+<!-- ═══ RETÂNGULO DO SISTEMA ═══ -->
+<rect x="195" y="55" width="660" height="978" rx="8" fill="none" stroke="#3a3020" stroke-width="2"/>
+<rect x="310" y="43" width="300" height="24" rx="4" fill="#141210"/>
+<text x="460" y="58" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="600" fill="#f5f0e8" letter-spacing="1">«sistema»</text>
+<text x="460" y="72" text-anchor="middle" font-family="Sora" font-size="10" fill="#6b5e4e">Sistema de Gestão Financeira</text>
+
+<!-- ═══════════════════════
+     ZONAS
+═══════════════════════ -->
+<!-- ZONA VENDAS -->
+<rect x="205" y="65" width="640" height="170" rx="6" fill="#1a150a" stroke="#2a2010" stroke-width="1"/>
+<text x="218" y="82" font-family="JetBrains Mono" font-size="9" fill="#4a3a18">VENDAS</text>
+
+<!-- ZONA GERENCIAMENTO -->
+<rect x="205" y="245" width="640" height="160" rx="6" fill="#0e160e" stroke="#1a2a1a" stroke-width="1"/>
+<text x="218" y="262" font-family="JetBrains Mono" font-size="9" fill="#1a3a1a">GERENCIAMENTO</text>
+
+<!-- ZONA FINANCEIRO -->
+<rect x="205" y="415" width="640" height="608" rx="6" fill="#0e0e1a" stroke="#1a1a2a" stroke-width="1"/>
+<text x="218" y="432" font-family="JetBrains Mono" font-size="9" fill="#1a1a3a">FINANCEIRO</text>
+
+<!-- ═══════════════════════════════
+     ZONA VENDAS — UCs
+═══════════════════════════════ -->
+
+<!-- UC01: Registrar Venda — CORE -->
+<ellipse cx="370" cy="135" rx="120" ry="32" fill="#2a1a08" stroke="#c48e3c" stroke-width="2.5"/>
+<text x="370" y="130" text-anchor="middle" font-family="Sora" font-size="12" font-weight="700" fill="#ffd580">Registrar Venda</text>
+<text x="370" y="146" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#c48e3c">«core business»</text>
+
+<!-- UC02: Emitir Alerta de Inconsistência -->
+<ellipse cx="670" cy="135" rx="118" ry="32" fill="#121a12" stroke="#6aaa6a" stroke-width="1.5" stroke-dasharray="5,3"/>
+<text x="670" y="130" text-anchor="middle" font-family="Sora" font-size="11" fill="#a0e0a0">Emitir Alerta de</text>
+<text x="670" y="146" text-anchor="middle" font-family="Sora" font-size="11" fill="#a0e0a0">Inconsistência</text>
+
+<!-- UC03: Consultar Cardápio -->
+<ellipse cx="370" cy="205" rx="108" ry="24" fill="#1a1612" stroke="#c48e3c" stroke-width="1.5"/>
+<text x="370" y="210" text-anchor="middle" font-family="Sora" font-size="11" fill="#e8d5b0">Consultar Cardápio</text>
+
+<!-- ═══════════════════════════════
+     ZONA GERENCIAMENTO — UCs
+═══════════════════════════════ -->
+
+<!-- UC04: Gerenciar Cardápio -->
+<ellipse cx="360" cy="300" rx="108" ry="26" fill="#1a1612" stroke="#c48e3c" stroke-width="1.5"/>
+<text x="360" y="305" text-anchor="middle" font-family="Sora" font-size="11" fill="#e8d5b0">Gerenciar Cardápio</text>
+
+<!-- UC05: Gerenciar Usuários -->
+<ellipse cx="360" cy="375" rx="108" ry="26" fill="#1a1612" stroke="#c48e3c" stroke-width="1.5"/>
+<text x="360" y="380" text-anchor="middle" font-family="Sora" font-size="11" fill="#e8d5b0">Gerenciar Usuários</text>
+
+<!-- UC06: Consultar Histórico -->
+<ellipse cx="650" cy="337" rx="108" ry="26" fill="#1a1612" stroke="#c48e3c" stroke-width="1.5"/>
+<text x="650" y="342" text-anchor="middle" font-family="Sora" font-size="11" fill="#e8d5b0">Consultar Histórico</text>
+
+<!-- ═══════════════════════════════
+     ZONA FINANCEIRO — UCs
+═══════════════════════════════ -->
+
+<!-- UC07: Gerar Relatório -->
+<ellipse cx="370" cy="490" rx="108" ry="26" fill="#1a1612" stroke="#c48e3c" stroke-width="1.5"/>
+<text x="370" y="495" text-anchor="middle" font-family="Sora" font-size="11" fill="#e8d5b0">Gerar Relatório</text>
+
+<!-- UC08: Exportar para Contador -->
+<ellipse cx="660" cy="490" rx="118" ry="26" fill="#121a12" stroke="#6aaa6a" stroke-width="1.5" stroke-dasharray="5,3"/>
+<text x="660" y="495" text-anchor="middle" font-family="Sora" font-size="11" fill="#a0e0a0">Exportar para Contador</text>
+
+<!-- UC09: Gerar Relatório Diário -->
+<ellipse cx="370" cy="590" rx="118" ry="26" fill="#1a1612" stroke="#c48e3c" stroke-width="1.5"/>
+<text x="370" y="595" text-anchor="middle" font-family="Sora" font-size="11" fill="#e8d5b0">Gerar Relatório Diário</text>
+
+<!-- UC10: Realizar Fechamento Mensal -->
+<ellipse cx="370" cy="700" rx="118" ry="30" fill="#1a1612" stroke="#c48e3c" stroke-width="1.5"/>
+<text x="370" y="696" text-anchor="middle" font-family="Sora" font-size="11" fill="#e8d5b0">Realizar Fechamento</text>
+<text x="370" y="710" text-anchor="middle" font-family="Sora" font-size="11" fill="#e8d5b0">Mensal</text>
+
+<!-- UC11: Visualizar Alertas -->
+<ellipse cx="660" cy="650" rx="108" ry="26" fill="#1a1612" stroke="#c48e3c" stroke-width="1.5"/>
+<text x="660" y="655" text-anchor="middle" font-family="Sora" font-size="11" fill="#e8d5b0">Visualizar Alertas</text>
+
+<!-- UC12: Executar Backup Automático -->
+<ellipse cx="510" cy="830" rx="126" ry="30" fill="#1a1612" stroke="#c48e3c" stroke-width="1.5"/>
+<text x="510" y="826" text-anchor="middle" font-family="Sora" font-size="11" fill="#e8d5b0">Executar Backup</text>
+<text x="510" y="840" text-anchor="middle" font-family="Sora" font-size="11" fill="#e8d5b0">Automático</text>
+
+<!-- ═══════════════════════════════
+     ATORES ESQUERDA
+═══════════════════════════════ -->
+
+<!-- ATOR: Atendente -->
+<circle cx="85" cy="155" r="18" fill="none" stroke="#8a7a66" stroke-width="2"/>
+<line x1="85" y1="173" x2="85" y2="228" stroke="#8a7a66" stroke-width="2"/>
+<line x1="55" y1="198" x2="115" y2="198" stroke="#8a7a66" stroke-width="2"/>
+<line x1="85" y1="228" x2="59" y2="264" stroke="#8a7a66" stroke-width="2"/>
+<line x1="85" y1="228" x2="111" y2="264" stroke="#8a7a66" stroke-width="2"/>
+<text x="85" y="282" text-anchor="middle" font-family="Sora" font-size="12" font-weight="600" fill="#c8b89a">Atendente</text>
+
+<!-- ATOR: Carlos -->
+<circle cx="85" cy="560" r="18" fill="none" stroke="#c48e3c" stroke-width="2"/>
+<line x1="85" y1="578" x2="85" y2="633" stroke="#c48e3c" stroke-width="2"/>
+<line x1="55" y1="603" x2="115" y2="603" stroke="#c48e3c" stroke-width="2"/>
+<line x1="85" y1="633" x2="59" y2="669" stroke="#c48e3c" stroke-width="2"/>
+<line x1="85" y1="633" x2="111" y2="669" stroke="#c48e3c" stroke-width="2"/>
+<text x="85" y="687" text-anchor="middle" font-family="Sora" font-size="12" font-weight="600" fill="#c48e3c">Carlos</text>
+<text x="85" y="701" text-anchor="middle" font-family="Sora" font-size="10" fill="#6b5e4e">(Proprietário)</text>
+
+<!-- ═══════════════════════════════
+     ATORES DIREITA
+═══════════════════════════════ -->
+
+<!-- ATOR: Contador -->
+<circle cx="955" cy="490" r="18" fill="none" stroke="#8a7a66" stroke-width="2"/>
+<line x1="955" y1="508" x2="955" y2="563" stroke="#8a7a66" stroke-width="2"/>
+<line x1="925" y1="533" x2="985" y2="533" stroke="#8a7a66" stroke-width="2"/>
+<line x1="955" y1="563" x2="929" y2="599" stroke="#8a7a66" stroke-width="2"/>
+<line x1="955" y1="563" x2="981" y2="599" stroke="#8a7a66" stroke-width="2"/>
+<text x="955" y="617" text-anchor="middle" font-family="Sora" font-size="12" font-weight="600" fill="#c8b89a">Contador</text>
+
+<!-- ATOR: Scheduler -->
+<circle cx="955" cy="830" r="18" fill="none" stroke="#6aaa6a" stroke-width="2"/>
+<line x1="955" y1="848" x2="955" y2="903" stroke="#6aaa6a" stroke-width="2"/>
+<line x1="925" y1="873" x2="985" y2="873" stroke="#6aaa6a" stroke-width="2"/>
+<line x1="955" y1="903" x2="929" y2="939" stroke="#6aaa6a" stroke-width="2"/>
+<line x1="955" y1="903" x2="981" y2="939" stroke="#6aaa6a" stroke-width="2"/>
+<text x="955" y="957" text-anchor="middle" font-family="Sora" font-size="12" font-weight="600" fill="#6aaa6a">«sistema»</text>
+<text x="955" y="971" text-anchor="middle" font-family="Sora" font-size="10" fill="#3a6a3a">Scheduler</text>
+
+<!-- ═══════════════════════════════
+     ASSOCIAÇÕES — ATENDENTE
+═══════════════════════════════ -->
+<!-- Atendente → Registrar Venda -->
+<line x1="103" y1="144" x2="248" y2="138" stroke="#8a7a66" stroke-width="1.5" marker-end="url(#as)"/>
+<!-- Atendente → Consultar Cardápio -->
+<line x1="103" y1="168" x2="260" y2="205" stroke="#8a7a66" stroke-width="1.5" marker-end="url(#as)"/>
+
+<!-- ═══════════════════════════════
+     ASSOCIAÇÕES — CARLOS
+═══════════════════════════════ -->
+<!-- Carlos → Registrar Venda -->
+<line x1="103" y1="542" x2="248" y2="155" stroke="#c48e3c" stroke-width="1.5" marker-end="url(#as)"/>
+<!-- Carlos → Consultar Cardápio -->
+<line x1="103" y1="548" x2="260" y2="208" stroke="#c48e3c" stroke-width="1.5" marker-end="url(#as)"/>
+<!-- Carlos → Gerenciar Cardápio -->
+<line x1="103" y1="554" x2="250" y2="302" stroke="#c48e3c" stroke-width="1.5" marker-end="url(#as)"/>
+<!-- Carlos → Gerenciar Usuários -->
+<line x1="103" y1="560" x2="250" y2="376" stroke="#c48e3c" stroke-width="1.5" marker-end="url(#as)"/>
+<!-- Carlos → Consultar Histórico -->
+<line x1="103" y1="566" x2="540" y2="338" stroke="#c48e3c" stroke-width="1.5" marker-end="url(#as)"/>
+<!-- Carlos → Gerar Relatório -->
+<line x1="103" y1="572" x2="260" y2="490" stroke="#c48e3c" stroke-width="1.5" marker-end="url(#as)"/>
+<!-- Carlos → Gerar Relatório Diário -->
+<line x1="103" y1="578" x2="250" y2="590" stroke="#c48e3c" stroke-width="1.5" marker-end="url(#as)"/>
+<!-- Carlos → Realizar Fechamento Mensal -->
+<line x1="103" y1="586" x2="250" y2="696" stroke="#c48e3c" stroke-width="1.5" marker-end="url(#as)"/>
+<!-- Carlos → Visualizar Alertas -->
+<line x1="103" y1="594" x2="550" y2="648" stroke="#c48e3c" stroke-width="1.5" marker-end="url(#as)"/>
+
+<!-- ═══════════════════════════════
+     ASSOCIAÇÕES — DIREITA
+═══════════════════════════════ -->
+<!-- Contador → Exportar para Contador -->
+<line x1="937" y1="494" x2="780" y2="494" stroke="#8a7a66" stroke-width="1.5" marker-end="url(#as)"/>
+<!-- Scheduler → Executar Backup -->
+<line x1="937" y1="834" x2="638" y2="834" stroke="#6aaa6a" stroke-width="1.5" marker-end="url(#as)"/>
+<!-- Scheduler → Gerar Relatório Diário -->
+<line x1="937" y1="820" x2="490" y2="596" stroke="#6aaa6a" stroke-width="1.5" marker-end="url(#as)"/>
+
+<!-- ═══════════════════════════════
+     «include»
+═══════════════════════════════ -->
+<!-- Realizar Fechamento --include--> Gerar Relatório -->
+<line x1="370" y1="670" x2="370" y2="516" stroke="#c48e3c" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#inc)"/>
+<text x="376" y="596" font-family="JetBrains Mono" font-size="8.5" fill="#c48e3c">«include»</text>
+
+<!-- ═══════════════════════════════
+     «extend»
+═══════════════════════════════ -->
+<!-- Emitir Alerta --extend--> Registrar Venda -->
+<line x1="552" y1="135" x2="492" y2="135" stroke="#6aaa6a" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#ext)"/>
+<text x="490" y="127" font-family="JetBrains Mono" font-size="8.5" fill="#6aaa6a">«extend»</text>
+
+<!-- Exportar para Contador --extend--> Gerar Relatório -->
+<line x1="580" y1="484" x2="480" y2="484" stroke="#6aaa6a" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#ext)"/>
+<text x="478" y="476" font-family="JetBrains Mono" font-size="8.5" fill="#6aaa6a">«extend»</text>
+
+</svg>
+</div>
+
+<div class="legend">
+  <div class="legend-item">
+    <div class="lb" style="background:#8a7a66"></div>
+    Associação — Atendente
+  </div>
+  <div class="legend-item">
+    <div class="lb" style="background:#c48e3c"></div>
+    Associação — Carlos
+  </div>
+  <div class="legend-item">
+    <div class="lb" style="background:#6aaa6a"></div>
+    Associação — Scheduler
+  </div>
+  <div class="legend-item">
+    <div class="lb" style="background:repeating-linear-gradient(to right,#c48e3c 0,#c48e3c 6px,transparent 6px,transparent 12px)"></div>
+    «include»
+  </div>
+  <div class="legend-item">
+    <div class="lb" style="background:repeating-linear-gradient(to right,#6aaa6a 0,#6aaa6a 6px,transparent 6px,transparent 12px)"></div>
+    «extend»
+  </div>
+</div>
+
+</body>
+</html>

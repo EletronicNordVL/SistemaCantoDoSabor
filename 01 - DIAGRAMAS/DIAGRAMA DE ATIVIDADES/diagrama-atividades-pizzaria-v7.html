@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagrama de Atividades v7 — Registrar Venda</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Sora:wght@300;400;600;700&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:#0d0d10;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:40px 20px 60px;
+    font-family:'Sora',sans-serif;
+  }
+  .header { text-align:center; margin-bottom:32px; }
+  .header h1 {
+    font-family:'JetBrains Mono',monospace;
+    color:#f5f0e8; font-size:1rem;
+    letter-spacing:.25em; text-transform:uppercase; margin-bottom:8px;
+  }
+  .header p { font-size:.8rem; color:#6b5e4e; font-family:'JetBrains Mono',monospace; letter-spacing:.1em; }
+  .wrapper {
+    background:#111118;
+    border:1px solid #1e1e30;
+    border-radius:16px;
+    padding:24px;
+    box-shadow:0 0 100px rgba(196,142,60,.06);
+    overflow-x:auto;
+    width:100%;
+    max-width:1000px;
+  }
+  .legend {
+    margin-top:28px; display:flex; flex-wrap:wrap;
+    gap:18px; justify-content:center;
+  }
+  .legend-item {
+    display:flex; align-items:center; gap:8px;
+    font-size:.73rem; color:#8a7a66; font-family:'JetBrains Mono',monospace;
+  }
+  .lb { width:28px; height:4px; border-radius:2px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>// Diagrama de Atividades — v7.0</h1>
+  <p>Registrar Venda — Pizzaria "Canto do Sabor" &nbsp;|&nbsp; UML 2.x</p>
+</div>
+<div class="wrapper">
+<!--
+  GRADE FIXA:
+  Raia A (Atendente): x=10 → x=330  | centro=170
+  Raia S (Sistema)  : x=330 → x=650 | centro=490
+  Raia C (Carlos)   : x=650 → x=970 | centro=810
+
+  Atividade: width=200, height=44, rx=22
+    Atendente: x=70,  cx=170
+    Sistema:   x=390, cx=490
+    Carlos:    x=710, cx=810
+
+  Decisão losango: 96px wide, 60px tall
+    Atendente: cx=170
+    Sistema:   cx=490
+
+  Regra de roteamento:
+    - Setas verticais SOMENTE dentro da mesma raia
+    - Setas horizontais para CRUZAR raias (saem da borda da atividade, entram na borda)
+    - NUNCA diagonal
+    - Setas de retorno: saem pela borda, descem/sobem pela lateral, entram pela borda
+-->
+<svg width="980" height="2700" viewBox="0 0 980 2700" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <marker id="arr"  markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#64748b"/></marker>
+  <marker id="arrG" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#22c55e"/></marker>
+  <marker id="arrR" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#ef4444"/></marker>
+  <marker id="arrY" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#f59e0b"/></marker>
+  <marker id="arrB" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#3b82f6"/></marker>
+</defs>
+
+<!-- FUNDO -->
+<rect x="5" y="5" width="970" height="2690" rx="10" fill="#111118" stroke="#1e1e30" stroke-width="1.5"/>
+<rect x="230" y="12" width="520" height="26" rx="6" fill="#1e1a14"/>
+<text x="490" y="30" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#c48e3c" letter-spacing="1">Registrar Venda — Pizzaria Canto do Sabor</text>
+
+<!-- ══════════════ SWIMLANES ══════════════ -->
+<rect x="10"  y="46" width="320" height="2648" fill="#0f1219" stroke="#1e2a3a" stroke-width="1"/>
+<rect x="10"  y="46" width="320" height="34"   fill="#0e1a2e"/>
+<text x="170" y="69" text-anchor="middle" font-family="Sora" font-size="13" font-weight="600" fill="#60a5fa">Atendente</text>
+
+<rect x="330" y="46" width="320" height="2648" fill="#13111a" stroke="#2a1e3a" stroke-width="1"/>
+<rect x="330" y="46" width="320" height="34"   fill="#1e1428"/>
+<text x="490" y="69" text-anchor="middle" font-family="Sora" font-size="13" font-weight="600" fill="#a78bfa">Sistema</text>
+
+<rect x="650" y="46" width="320" height="2648" fill="#1a150a" stroke="#3a2e10" stroke-width="1"/>
+<rect x="650" y="46" width="320" height="34"   fill="#2a1e08"/>
+<text x="810" y="69" text-anchor="middle" font-family="Sora" font-size="13" font-weight="600" fill="#fbbf24">Carlos</text>
+
+<line x1="330" y1="46" x2="330" y2="2694" stroke="#2a1e3a" stroke-width="1.5"/>
+<line x1="650" y1="46" x2="650" y2="2694" stroke="#3a2e10" stroke-width="1.5"/>
+
+<!-- FE03 nota [Carlos] abaixo do cabeçalho -->
+<rect x="660" y="88" width="300" height="56" rx="6" fill="#1a1a0e" stroke="#ca8a04" stroke-width="1" stroke-dasharray="4,2"/>
+<text x="810" y="106" text-anchor="middle" font-family="JetBrains Mono" font-size="8.5" fill="#ca8a04">FE03: Perda de conexão em</text>
+<text x="810" y="120" text-anchor="middle" font-family="JetBrains Mono" font-size="8.5" fill="#ca8a04">qualquer etapa → sistema preserva</text>
+<text x="810" y="134" text-anchor="middle" font-family="JetBrains Mono" font-size="8.5" fill="#ca8a04">dados e aguarda reconexão</text>
+
+<!-- ══════════════ NÓ INICIAL ══════════════ -->
+<circle cx="170" cy="168" r="14" fill="#f1f5f9"/>
+<line x1="170" y1="182" x2="170" y2="206" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- ══════════════════════════════════════════
+     BLOCO 1 — AUTENTICAÇÃO  y:206 → 560
+══════════════════════════════════════════ -->
+
+<!-- A1: Acessar Sistema [A] y:206 centro:228 -->
+<rect x="70" y="206" width="200" height="44" rx="22" fill="#1a2236" stroke="#3b82f6" stroke-width="1.5"/>
+<text x="170" y="224" text-anchor="middle" font-family="Sora" font-size="11" fill="#93c5fd">Acessar o Sistema</text>
+<line x1="170" y1="250" x2="170" y2="274" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- A2: Informar Login [A] y:274 centro:296 -->
+<rect x="70" y="274" width="200" height="44" rx="22" fill="#1a2236" stroke="#3b82f6" stroke-width="1.5"/>
+<text x="170" y="292" text-anchor="middle" font-family="Sora" font-size="11" fill="#93c5fd">Informar Login</text>
+<text x="170" y="308" text-anchor="middle" font-family="Sora" font-size="11" fill="#93c5fd">e Senha</text>
+<!-- saída direita borda=270 → entrada esquerda borda=390 -->
+<line x1="270" y1="296" x2="390" y2="296" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- A3: Validar Autenticação [S] y:274 centro:296 -->
+<rect x="390" y="274" width="200" height="44" rx="22" fill="#1e1630" stroke="#8b5cf6" stroke-width="1.5"/>
+<text x="490" y="292" text-anchor="middle" font-family="Sora" font-size="11" fill="#c4b5fd">Validar</text>
+<text x="490" y="308" text-anchor="middle" font-family="Sora" font-size="11" fill="#c4b5fd">Autenticação</text>
+<line x1="490" y1="318" x2="490" y2="342" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- D1: Login válido? [S] cx=490 cy=372 -->
+<polygon points="490,342 538,372 490,402 442,372" fill="#1a1a2e" stroke="#22c55e" stroke-width="1.5"/>
+<text x="490" y="368" text-anchor="middle" font-family="Sora" font-size="10" fill="#86efac">Login</text>
+<text x="490" y="382" text-anchor="middle" font-family="Sora" font-size="10" fill="#86efac">válido?</text>
+
+<!-- Não: saída esquerda losango → horizontal direto até raia A → erro -->
+<line x1="442" y1="372" x2="270" y2="372" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrR)"/>
+<text x="330" y="364" font-family="JetBrains Mono" font-size="8.5" fill="#ef4444">Não</text>
+<rect x="70" y="351" width="200" height="44" rx="22" fill="#2e1616" stroke="#ef4444" stroke-width="1.5"/>
+<text x="170" y="369" text-anchor="middle" font-family="Sora" font-size="10" fill="#fca5a5">Exibir Mensagem</text>
+<text x="170" y="383" text-anchor="middle" font-family="Sora" font-size="10" fill="#fca5a5">de Erro</text>
+<line x1="170" y1="395" x2="170" y2="428" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrR)"/>
+<circle cx="170" cy="444" r="13" fill="#f1f5f9"/>
+<circle cx="170" cy="444" r="8"  fill="#0d0d10"/>
+<text x="170" y="466" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#ef4444">fim 1 — acesso negado</text>
+
+<!-- Sim: desce no S -->
+<line x1="490" y1="402" x2="490" y2="426" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arrG)"/>
+<text x="498" y="418" font-family="JetBrains Mono" font-size="8.5" fill="#22c55e">Sim</text>
+
+<!-- A4: Exibir Formulário [S] y:426 centro:448 -->
+<rect x="390" y="426" width="200" height="44" rx="22" fill="#1e1630" stroke="#8b5cf6" stroke-width="1.5"/>
+<text x="490" y="444" text-anchor="middle" font-family="Sora" font-size="11" fill="#c4b5fd">Exibir Formulário</text>
+<text x="490" y="460" text-anchor="middle" font-family="Sora" font-size="11" fill="#c4b5fd">de Registro</text>
+<!-- saída esquerda S → entrada direita A em y=448 → desce até Selecionar Produto -->
+<line x1="390" y1="448" x2="270" y2="448" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="170" y1="448" x2="170" y2="494" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- ══════════════════════════════════════════
+     BLOCO 2 — SELEÇÃO E PRODUTO  y:494 → 760
+══════════════════════════════════════════ -->
+
+<!-- A5: Selecionar Produto [A] y:494 centro:516 -->
+<rect x="70" y="494" width="200" height="44" rx="22" fill="#1a2236" stroke="#3b82f6" stroke-width="1.5"/>
+<text x="170" y="512" text-anchor="middle" font-family="Sora" font-size="11" fill="#93c5fd">Selecionar</text>
+<text x="170" y="528" text-anchor="middle" font-family="Sora" font-size="11" fill="#93c5fd">Produto(s)</text>
+<line x1="170" y1="538" x2="170" y2="562" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- D2: Produto no cardápio? [A] cx=170 cy=592 -->
+<polygon points="170,562 218,592 170,622 122,592" fill="#1a2236" stroke="#22c55e" stroke-width="1.5"/>
+<text x="170" y="588" text-anchor="middle" font-family="Sora" font-size="10" fill="#86efac">Produto no</text>
+<text x="170" y="602" text-anchor="middle" font-family="Sora" font-size="10" fill="#86efac">cardápio?</text>
+
+<!-- FA03: Não → horizontal direto A→S -->
+<line x1="218" y1="592" x2="390" y2="592" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrR)"/>
+<text x="270" y="584" font-family="JetBrains Mono" font-size="8.5" fill="#ef4444">FA03: Não</text>
+<!-- Mensagem produto não cadastrado [S] y:571 -->
+<rect x="390" y="571" width="200" height="44" rx="22" fill="#2e1616" stroke="#ef4444" stroke-width="1.5"/>
+<text x="490" y="589" text-anchor="middle" font-family="Sora" font-size="10" fill="#fca5a5">Exibir: Produto não</text>
+<text x="490" y="603" text-anchor="middle" font-family="Sora" font-size="10" fill="#fca5a5">cadastrado</text>
+<line x1="490" y1="615" x2="490" y2="648" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrR)"/>
+<circle cx="490" cy="664" r="13" fill="#f1f5f9"/>
+<circle cx="490" cy="664" r="8"  fill="#0d0d10"/>
+<text x="490" y="686" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#ef4444">fim 2 — produto não cadastrado</text>
+<!-- NOTA FA03: encerra pois cadastro é outro UC -->
+<rect x="660" y="571" width="270" height="54" rx="4" fill="#1a0e0e" stroke="#ef4444" stroke-width="1" stroke-dasharray="4,2"/>
+<text x="795" y="589" text-anchor="middle" font-family="JetBrains Mono" font-size="8.5" fill="#ef4444">Nota FA03: cadastrar produto</text>
+<text x="795" y="603" text-anchor="middle" font-family="JetBrains Mono" font-size="8.5" fill="#ef4444">é responsabilidade do UC</text>
+<text x="795" y="617" text-anchor="middle" font-family="JetBrains Mono" font-size="8.5" fill="#ef4444">Gerenciar Cardápio (Carlos)</text>
+
+<!-- Sim: A desce -->
+<line x1="170" y1="622" x2="170" y2="646" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arrG)"/>
+<text x="178" y="638" font-family="JetBrains Mono" font-size="8.5" fill="#22c55e">Sim</text>
+
+<!-- A6: Preencher Valor Automaticamente [Sistema] y:700 -->
+<!-- A desce até y=700 (topo de A6) depois horizontal até borda esquerda -->
+<line x1="170" y1="646" x2="170" y2="700" stroke="#64748b" stroke-width="1.5"/>
+<line x1="170" y1="700" x2="390" y2="700" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<rect x="390" y="700" width="200" height="44" rx="22" fill="#1e1630" stroke="#8b5cf6" stroke-width="1.5"/>
+<text x="490" y="718" text-anchor="middle" font-family="Sora" font-size="11" fill="#c4b5fd">Preencher Valor</text>
+<text x="490" y="734" text-anchor="middle" font-family="Sora" font-size="11" fill="#c4b5fd">Automaticamente</text>
+<!-- S→A horizontal direto: saída esquerda borda S=390 → entrada direita borda A=270 -->
+<line x1="390" y1="744" x2="270" y2="744" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="170" y1="744" x2="170" y2="768" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- ══════════════════════════════════════════
+     BLOCO 3 — QUANTIDADE E FA01  y:768 → 1020
+══════════════════════════════════════════ -->
+
+<!-- A7: Informar Quantidade [A] y:768 -->
+<rect x="70" y="768" width="200" height="44" rx="22" fill="#1a2236" stroke="#3b82f6" stroke-width="1.5"/>
+<text x="170" y="786" text-anchor="middle" font-family="Sora" font-size="11" fill="#93c5fd">Informar</text>
+<text x="170" y="802" text-anchor="middle" font-family="Sora" font-size="11" fill="#93c5fd">Quantidade</text>
+<line x1="170" y1="812" x2="170" y2="836" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- D3: Mais produtos? [A] cx=170 cy=866 -->
+<polygon points="170,836 218,866 170,896 122,866" fill="#1a2236" stroke="#22c55e" stroke-width="1.5"/>
+<text x="170" y="862" text-anchor="middle" font-family="Sora" font-size="10" fill="#86efac">Adicionar mais</text>
+<text x="170" y="876" text-anchor="middle" font-family="Sora" font-size="10" fill="#86efac">produtos?</text>
+
+<!-- FA01: Sim → sai esquerda, sobe, volta a A5 -->
+<line x1="122" y1="866" x2="28"  y2="866" stroke="#3b82f6" stroke-width="1.5"/>
+<line x1="28"  y1="866" x2="28"  y2="516" stroke="#3b82f6" stroke-width="1.5"/>
+<line x1="28"  y1="516" x2="70"  y2="516" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrB)"/>
+<text x="16" y="700" font-family="JetBrains Mono" font-size="8.5" fill="#3b82f6" transform="rotate(-90,16,700)">FA01: Sim — adicionar produto</text>
+
+<!-- NOTA FA01: Sistema acumula itens -->
+<rect x="340" y="840" width="260" height="44" rx="4" fill="#0e1a2e" stroke="#3b82f6" stroke-width="1" stroke-dasharray="4,2"/>
+<text x="470" y="858" text-anchor="middle" font-family="JetBrains Mono" font-size="8.5" fill="#3b82f6">Nota FA01: sistema acumula os</text>
+<text x="470" y="872" text-anchor="middle" font-family="JetBrains Mono" font-size="8.5" fill="#3b82f6">itens e recalcula o total a cada adição</text>
+
+<!-- Não: desce -->
+<line x1="170" y1="896" x2="170" y2="920" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arrG)"/>
+<text x="178" y="912" font-family="JetBrains Mono" font-size="8.5" fill="#22c55e">Não</text>
+
+<!-- ══════════════════════════════════════════
+     BLOCO 4 — FORMA PAGAMENTO E FA02  y:920 → 1260
+══════════════════════════════════════════ -->
+
+<!-- A8: Informar Forma Pagamento [A] y:920 -->
+<rect x="70" y="920" width="200" height="44" rx="22" fill="#1a2236" stroke="#3b82f6" stroke-width="1.5"/>
+<text x="170" y="938" text-anchor="middle" font-family="Sora" font-size="11" fill="#93c5fd">Informar Forma</text>
+<text x="170" y="954" text-anchor="middle" font-family="Sora" font-size="11" fill="#93c5fd">de Pagamento</text>
+<line x1="170" y1="964" x2="170" y2="988" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- D4: Pgto combinado? [A] cx=170 cy=1018 -->
+<polygon points="170,988 218,1018 170,1048 122,1018" fill="#1a2236" stroke="#22c55e" stroke-width="1.5"/>
+<text x="170" y="1014" text-anchor="middle" font-family="Sora" font-size="10" fill="#86efac">Pagamento</text>
+<text x="170" y="1028" text-anchor="middle" font-family="Sora" font-size="10" fill="#86efac">combinado?</text>
+
+<!-- FA02 Sim: sai esquerda → desce → A9 Informar Valor [A] -->
+<line x1="122" y1="1018" x2="36"  y2="1018" stroke="#3b82f6" stroke-width="1.5"/>
+<line x1="36"  y1="1018" x2="36"  y2="1090" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrB)"/>
+<text x="24" y="1058" font-family="JetBrains Mono" font-size="8.5" fill="#3b82f6" transform="rotate(-90,24,1058)">FA02: Sim</text>
+
+<!-- A9: Informar Valor por Forma [A] y:1090 -->
+<rect x="44" y="1090" width="212" height="44" rx="22" fill="#1a2236" stroke="#3b82f6" stroke-width="1.5"/>
+<text x="150" y="1108" text-anchor="middle" font-family="Sora" font-size="11" fill="#93c5fd">Informar Valor por</text>
+<text x="150" y="1124" text-anchor="middle" font-family="Sora" font-size="11" fill="#93c5fd">Forma de Pgto.</text>
+<!-- horizontal A→S direto: borda direita A9=256 → borda esquerda A10=390 -->
+<line x1="256" y1="1112" x2="390" y2="1112" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- A10: Validar Soma [S] y:1090 -->
+<rect x="390" y="1090" width="200" height="44" rx="22" fill="#1e1630" stroke="#8b5cf6" stroke-width="1.5"/>
+<text x="490" y="1108" text-anchor="middle" font-family="Sora" font-size="11" fill="#c4b5fd">Validar Soma</text>
+<text x="490" y="1124" text-anchor="middle" font-family="Sora" font-size="11" fill="#c4b5fd">das Formas de Pgto.</text>
+<line x1="490" y1="1134" x2="490" y2="1158" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- D5: Soma cobre total? [S] cx=490 cy=1188 -->
+<polygon points="490,1158 538,1188 490,1218 442,1188" fill="#1a1a2e" stroke="#22c55e" stroke-width="1.5"/>
+<text x="490" y="1184" text-anchor="middle" font-family="Sora" font-size="10" fill="#86efac">Soma cobre</text>
+<text x="490" y="1198" text-anchor="middle" font-family="Sora" font-size="10" fill="#86efac">o total?</text>
+
+<!-- Não: sai direita S → sobe ACIMA de Validar Soma (y=1080) → horizontal → entrada direita A9 -->
+<line x1="538" y1="1188" x2="630" y2="1188" stroke="#ef4444" stroke-width="1.5"/>
+<line x1="630" y1="1188" x2="630" y2="1080" stroke="#ef4444" stroke-width="1.5"/>
+<line x1="630" y1="1080" x2="256" y2="1080" stroke="#ef4444" stroke-width="1.5"/>
+<line x1="256" y1="1080" x2="256" y2="1090" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrR)"/>
+<text x="634" y="1140" font-family="JetBrains Mono" font-size="8.5" fill="#ef4444">Não</text>
+
+<!-- Sim FA02: desce S para ponto junção -->
+<line x1="490" y1="1218" x2="490" y2="1270" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arrG)"/>
+<text x="498" y="1248" font-family="JetBrains Mono" font-size="8.5" fill="#22c55e">Sim</text>
+
+<!-- FA02 Não: A desce de 1048 → 1270, depois horizontal direto A→ponto junção -->
+<line x1="170" y1="1048" x2="170" y2="1270" stroke="#22c55e" stroke-width="1.5"/>
+<text x="178" y="1164" font-family="JetBrains Mono" font-size="8.5" fill="#22c55e">Não</text>
+<line x1="170" y1="1270" x2="480" y2="1270" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arrG)"/>
+
+<!-- Ponto de junção [S] y=1270 -->
+<circle cx="490" cy="1270" r="8" fill="#94a3b8"/>
+<line x1="490" y1="1278" x2="490" y2="1302" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- ══════════════════════════════════════════
+     BLOCO 5 — CALCULAR E CONFIRMAR  y:1302 → 1560
+══════════════════════════════════════════ -->
+
+<!-- A11: Calcular e Exibir Total [S] y:1302 -->
+<rect x="390" y="1302" width="200" height="44" rx="22" fill="#1e1630" stroke="#8b5cf6" stroke-width="1.5"/>
+<text x="490" y="1320" text-anchor="middle" font-family="Sora" font-size="11" fill="#c4b5fd">Calcular e Exibir</text>
+<text x="490" y="1336" text-anchor="middle" font-family="Sora" font-size="11" fill="#c4b5fd">Valor Total</text>
+<!-- S→A horizontal direto: saída esquerda S=390 → entrada direita A=270 em y=1324 -->
+<line x1="390" y1="1324" x2="270" y2="1324" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+<line x1="170" y1="1324" x2="170" y2="1368" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- A12: Confirmar Registro [A] y:1368 -->
+<rect x="70" y="1368" width="200" height="44" rx="22" fill="#1a2236" stroke="#3b82f6" stroke-width="1.5"/>
+<text x="170" y="1386" text-anchor="middle" font-family="Sora" font-size="11" fill="#93c5fd">Confirmar</text>
+<text x="170" y="1402" text-anchor="middle" font-family="Sora" font-size="11" fill="#93c5fd">Registro</text>
+<!-- A→S horizontal em y=1390 saindo pela direita de A, entrando pela esquerda de S -->
+<line x1="270" y1="1390" x2="390" y2="1390" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- A13: Validar Dados [S] y:1368 — entra pelo topo -->
+<rect x="390" y="1368" width="200" height="44" rx="22" fill="#1e1630" stroke="#8b5cf6" stroke-width="1.5"/>
+<text x="490" y="1386" text-anchor="middle" font-family="Sora" font-size="11" fill="#c4b5fd">Validar Dados</text>
+<text x="490" y="1402" text-anchor="middle" font-family="Sora" font-size="11" fill="#c4b5fd">do Registro</text>
+<line x1="490" y1="1412" x2="490" y2="1436" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- D6: Dados válidos? [S] cx=490 cy=1466 -->
+<polygon points="490,1436 538,1466 490,1496 442,1466" fill="#1a1a2e" stroke="#22c55e" stroke-width="1.5"/>
+<text x="490" y="1462" text-anchor="middle" font-family="Sora" font-size="10" fill="#86efac">Dados</text>
+<text x="490" y="1476" text-anchor="middle" font-family="Sora" font-size="10" fill="#86efac">válidos?</text>
+
+<!-- FE01: Não → horizontal direto S→A -->
+<line x1="442" y1="1466" x2="270" y2="1466" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrR)"/>
+<text x="330" y="1458" font-family="JetBrains Mono" font-size="8.5" fill="#ef4444">FE01: Não</text>
+<rect x="70" y="1445" width="200" height="44" rx="22" fill="#2e1616" stroke="#ef4444" stroke-width="1.5"/>
+<text x="170" y="1463" text-anchor="middle" font-family="Sora" font-size="10" fill="#fca5a5">Destacar Campos</text>
+<text x="170" y="1477" text-anchor="middle" font-family="Sora" font-size="10" fill="#fca5a5">com Erro</text>
+<!-- sobe lateral esquerda de volta a Confirmar -->
+<line x1="70"  y1="1467" x2="44"  y2="1467" stroke="#ef4444" stroke-width="1.5"/>
+<line x1="44"  y1="1467" x2="44"  y2="1390" stroke="#ef4444" stroke-width="1.5"/>
+<line x1="44"  y1="1390" x2="70"  y2="1390" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrR)"/>
+<!-- NOTA FE01: total já calculado, só corrige campos -->
+<rect x="660" y="1445" width="270" height="44" rx="4" fill="#1a0e0e" stroke="#ef4444" stroke-width="1" stroke-dasharray="4,2"/>
+<text x="795" y="1463" text-anchor="middle" font-family="JetBrains Mono" font-size="8.5" fill="#ef4444">Nota FE01: total já calculado.</text>
+<text x="795" y="1477" text-anchor="middle" font-family="JetBrains Mono" font-size="8.5" fill="#ef4444">Usuário apenas corrige os campos</text>
+
+<!-- Sim: desce S -->
+<line x1="490" y1="1496" x2="490" y2="1520" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arrG)"/>
+<text x="498" y="1512" font-family="JetBrains Mono" font-size="8.5" fill="#22c55e">Sim</text>
+
+<!-- ══════════════════════════════════════════
+     BLOCO 6 — INCONSISTÊNCIA FORK/JOIN  y:1520 → 1900
+══════════════════════════════════════════ -->
+
+<!-- D7: Inconsistência detectada? [S] cx=490 cy=1550 -->
+<polygon points="490,1520 538,1550 490,1580 442,1550" fill="#1a1a2e" stroke="#22c55e" stroke-width="1.5"/>
+<text x="490" y="1546" text-anchor="middle" font-family="Sora" font-size="10" fill="#86efac">Inconsistência</text>
+<text x="490" y="1560" text-anchor="middle" font-family="Sora" font-size="10" fill="#86efac">detectada?</text>
+
+<!-- Não: sai esquerda S → desce pela lateral → ponto junção -->
+<line x1="442" y1="1550" x2="340" y2="1550" stroke="#22c55e" stroke-width="1.5"/>
+<line x1="340" y1="1550" x2="340" y2="1790" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arrG)"/>
+<text x="344" y="1674" font-family="JetBrains Mono" font-size="8.5" fill="#22c55e">Não</text>
+
+<!-- Sim: desce S para FORK -->
+<line x1="490" y1="1580" x2="490" y2="1614" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrR)"/>
+<text x="498" y="1602" font-family="JetBrains Mono" font-size="8.5" fill="#ef4444">Sim</text>
+
+<!-- FORK bar y=1614 — estende até raia Carlos -->
+<rect x="390" y="1614" width="400" height="7" rx="3" fill="#f59e0b"/>
+<text x="590" y="1608" text-anchor="middle" font-family="JetBrains Mono" font-size="8.5" fill="#f59e0b">[ fork ]</text>
+<!-- fork → Emitir Alerta [S] cx=490 -->
+<line x1="490" y1="1621" x2="490" y2="1644" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arrY)"/>
+<!-- fork → Carlos cx=780 -->
+<line x1="780" y1="1621" x2="780" y2="1644" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arrY)"/>
+
+<!-- Emitir Alerta [S] y:1644 — cx=490 corrigido -->
+<rect x="390" y="1644" width="200" height="44" rx="22" fill="#1e1630" stroke="#8b5cf6" stroke-width="1.5"/>
+<text x="490" y="1662" text-anchor="middle" font-family="Sora" font-size="11" fill="#c4b5fd">Emitir Alerta de</text>
+<text x="490" y="1678" text-anchor="middle" font-family="Sora" font-size="11" fill="#c4b5fd">Inconsistência</text>
+<line x1="490" y1="1688" x2="490" y2="1724" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrY)"/>
+
+<!-- Carlos Recebe Notificação [C] y:1644 — cx=780 -->
+<rect x="660" y="1644" width="240" height="44" rx="22" fill="#2a1e08" stroke="#f59e0b" stroke-width="1.5"/>
+<text x="780" y="1662" text-anchor="middle" font-family="Sora" font-size="11" fill="#fde68a">Carlos Recebe</text>
+<text x="780" y="1678" text-anchor="middle" font-family="Sora" font-size="11" fill="#fde68a">Notificação</text>
+<line x1="780" y1="1688" x2="780" y2="1724" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrY)"/>
+
+<!-- JOIN bar y=1724 — estende até Carlos -->
+<rect x="390" y="1724" width="400" height="7" rx="3" fill="#f59e0b"/>
+<text x="590" y="1746" text-anchor="middle" font-family="JetBrains Mono" font-size="8.5" fill="#f59e0b">[ join ]</text>
+<!-- join desce verticalmente do centro para ponto junção -->
+<line x1="490" y1="1731" x2="490" y2="1790" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arrY)"/>
+
+<!-- Ponto de junção [S] y=1790 — une Não e join -->
+<circle cx="490" cy="1790" r="8" fill="#94a3b8"/>
+<!-- Não chega pelo lado esquerdo -->
+<line x1="340" y1="1790" x2="482" y2="1790" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arrG)"/>
+<!-- desce para Armazenar -->
+<line x1="490" y1="1798" x2="490" y2="1822" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- ══════════════════════════════════════════
+     BLOCO 7 — ARMAZENAR E CONFIRMAÇÃO  y:1822 → 2100
+══════════════════════════════════════════ -->
+
+<!-- A14: Armazenar Venda [S] y:1822 -->
+<rect x="390" y="1822" width="200" height="44" rx="22" fill="#1e1630" stroke="#8b5cf6" stroke-width="1.5"/>
+<text x="490" y="1840" text-anchor="middle" font-family="Sora" font-size="11" fill="#c4b5fd">Armazenar Venda</text>
+<text x="490" y="1856" text-anchor="middle" font-family="Sora" font-size="11" fill="#c4b5fd">com Rastreabilidade</text>
+<line x1="490" y1="1866" x2="490" y2="1890" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- A15: Exibir Confirmação [S] y:1890 -->
+<rect x="390" y="1890" width="200" height="44" rx="22" fill="#162016" stroke="#22c55e" stroke-width="1.5"/>
+<text x="490" y="1908" text-anchor="middle" font-family="Sora" font-size="11" fill="#86efac">Exibir Confirmação</text>
+<text x="490" y="1924" text-anchor="middle" font-family="Sora" font-size="11" fill="#86efac">de Registro ✓</text>
+<!-- S→A horizontal direto: borda esquerda S=390 → borda direita A=270 em y=1934 -->
+<line x1="390" y1="1934" x2="270" y2="1934" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+<!-- S desce para convergência final -->
+<line x1="490" y1="1934" x2="490" y2="2040" stroke="#64748b" stroke-width="1.5"/>
+
+<!-- A16: Receber Confirmação [A] y:1934 chegando da horizontal -->
+<rect x="70" y="1960" width="200" height="44" rx="22" fill="#162016" stroke="#22c55e" stroke-width="1.5"/>
+<text x="170" y="1978" text-anchor="middle" font-family="Sora" font-size="11" fill="#86efac">Receber</text>
+<text x="170" y="1994" text-anchor="middle" font-family="Sora" font-size="11" fill="#86efac">Confirmação</text>
+<!-- entrada pelo topo vindo da horizontal em y=1934 -->
+<line x1="170" y1="1934" x2="170" y2="1960" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+<!-- A desce para convergência final -->
+<line x1="170" y1="2004" x2="170" y2="2040" stroke="#64748b" stroke-width="1.5"/>
+
+<!-- CONVERGÊNCIA VERTICAL — linha horizontal na base -->
+<line x1="170" y1="2040" x2="490" y2="2040" stroke="#64748b" stroke-width="1.5"/>
+<!-- desce ao centro para nó final -->
+<line x1="330" y1="2040" x2="330" y2="2068" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- NÓ FINAL — centralizado entre A e S -->
+<circle cx="330" cy="2092" r="16" fill="#f1f5f9"/>
+<circle cx="330" cy="2092" r="10" fill="#0d0d10"/>
+<text x="330" y="2120" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#22c55e">fim 3 — Venda Registrada com Sucesso</text>
+
+<!-- NOTA pós fim 3: sistema retorna à tela inicial -->
+<rect x="100" y="2136" width="560" height="44" rx="4" fill="#0e1a14" stroke="#22c55e" stroke-width="1" stroke-dasharray="4,2"/>
+<text x="380" y="2154" text-anchor="middle" font-family="JetBrains Mono" font-size="8.5" fill="#22c55e">Após o registro: sistema retorna à tela inicial para novo registro.</text>
+<text x="380" y="2168" text-anchor="middle" font-family="JetBrains Mono" font-size="8.5" fill="#22c55e">Sessão permanece ativa até logout explícito do usuário.</text>
+
+</svg>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="lb" style="background:#f1f5f9;width:14px;height:14px;border-radius:50%"></div> Nó Inicial / Final</div>
+  <div class="legend-item"><div class="lb" style="background:#1a2236;border:2px solid #3b82f6;height:14px;border-radius:4px"></div> Atendente</div>
+  <div class="legend-item"><div class="lb" style="background:#1e1630;border:2px solid #8b5cf6;height:14px;border-radius:4px"></div> Sistema</div>
+  <div class="legend-item"><div class="lb" style="background:#2a1e08;border:2px solid #f59e0b;height:14px;border-radius:4px"></div> Carlos</div>
+  <div class="legend-item"><div class="lb" style="background:#f59e0b"></div> Fork / Join</div>
+  <div class="legend-item"><div class="lb" style="background:#ef4444"></div> Fluxo de exceção</div>
+  <div class="legend-item"><div class="lb" style="background:#3b82f6"></div> Fluxo alternativo</div>
+  <div class="legend-item"><div class="lb" style="background:#22c55e"></div> Fluxo positivo</div>
+  <div class="legend-item"><div class="lb" style="background:#94a3b8;border-radius:50%;width:12px;height:12px"></div> Ponto de junção</div>
+</div>
+
+</body>
+</html>

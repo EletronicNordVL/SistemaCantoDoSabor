@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagrama de Estados — Venda</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:#ffffff;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:40px 20px;
+    font-family:'Segoe UI', Arial, sans-serif;
+  }
+  .wrapper {
+    background:#ffffff;
+    border:1px solid #cccccc;
+    border-radius:4px;
+    padding:32px;
+    width:100%;
+    max-width:1300px;
+    overflow-x:auto;
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+<svg width="1240" height="620" viewBox="0 0 1240 620" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0,10 3.5,0 7" fill="#333333"/>
+  </marker>
+</defs>
+
+<!-- FUNDO BRANCO -->
+<rect x="0" y="0" width="1240" height="620" fill="#ffffff"/>
+
+<!-- ═══ NÓ INICIAL ═══ -->
+<circle cx="30" cy="240" r="12" fill="#333333"/>
+<line x1="42" y1="240" x2="78" y2="240" stroke="#333333" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- ═══════════════════════════
+     ESTADO: Em Registro
+     x=80 y=180 w=220 h=130
+═══════════════════════════ -->
+<rect x="80" y="180" width="220" height="130" rx="6" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<text x="190" y="200" text-anchor="middle" font-family="Segoe UI,Arial" font-size="12" font-weight="600" fill="#000000">Em Registro</text>
+<line x1="80" y1="208" x2="300" y2="208" stroke="#333333" stroke-width="1"/>
+<text x="90" y="224" font-family="Segoe UI,Arial" font-size="10" fill="#333333">entry / exibir formulário de registro</text>
+<text x="90" y="239" font-family="Segoe UI,Arial" font-size="10" fill="#333333">do / aguardar preenchimento dos dados</text>
+<text x="90" y="254" font-family="Segoe UI,Arial" font-size="10" fill="#333333">exit / registrar dados no objeto Venda</text>
+
+<!-- Em Registro → Aguardando Confirmação -->
+<line x1="300" y1="240" x2="366" y2="240" stroke="#333333" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="310" y="230" font-family="Segoe UI,Arial" font-size="9" fill="#333333">finalizarPreenchimento()</text>
+
+<!-- Em Registro → Cancelada (desce) -->
+<line x1="190" y1="310" x2="190" y2="380" stroke="#333333" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="196" y="350" font-family="Segoe UI,Arial" font-size="9" fill="#333333">cancelar()</text>
+
+<!-- ═══════════════════════════
+     ESTADO: Cancelada
+     x=90 y=380 w=200 h=100
+═══════════════════════════ -->
+<rect x="90" y="380" width="200" height="100" rx="6" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<text x="190" y="400" text-anchor="middle" font-family="Segoe UI,Arial" font-size="12" font-weight="600" fill="#000000">Cancelada</text>
+<line x1="90" y1="408" x2="290" y2="408" stroke="#333333" stroke-width="1"/>
+<text x="100" y="424" font-family="Segoe UI,Arial" font-size="10" fill="#333333">entry / exibir motivo do cancelamento</text>
+<text x="100" y="439" font-family="Segoe UI,Arial" font-size="10" fill="#333333">do / registrar log</text>
+<text x="100" y="454" font-family="Segoe UI,Arial" font-size="10" fill="#333333">exit / arquivar tentativa</text>
+
+<!-- Nó Final Cancelada -->
+<line x1="190" y1="480" x2="190" y2="520" stroke="#333333" stroke-width="1.5" marker-end="url(#arr)"/>
+<circle cx="190" cy="536" r="12" fill="#ffffff" stroke="#333333" stroke-width="2"/>
+<circle cx="190" cy="536" r="7" fill="#333333"/>
+
+<!-- ═══════════════════════════
+     ESTADO: Aguardando Confirmação
+     x=366 y=180 w=220 h=110
+═══════════════════════════ -->
+<rect x="366" y="180" width="230" height="110" rx="6" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<text x="481" y="200" text-anchor="middle" font-family="Segoe UI,Arial" font-size="12" font-weight="600" fill="#000000">Aguardando Confirmação</text>
+<line x1="366" y1="208" x2="596" y2="208" stroke="#333333" stroke-width="1"/>
+<text x="376" y="224" font-family="Segoe UI,Arial" font-size="10" fill="#333333">entry / exibir total calculado</text>
+<text x="376" y="239" font-family="Segoe UI,Arial" font-size="10" fill="#333333">do / aguardar ação do Atendente</text>
+<text x="376" y="254" font-family="Segoe UI,Arial" font-size="10" fill="#333333">exit / enviar dados para validação</text>
+
+<!-- Aguardando Confirmação → Validando -->
+<line x1="596" y1="240" x2="666" y2="240" stroke="#333333" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="604" y="230" font-family="Segoe UI,Arial" font-size="9" fill="#333333">confirmar()</text>
+
+<!-- ═══════════════════════════
+     ESTADO: Validando
+     x=666 y=180 w=230 h=130
+═══════════════════════════ -->
+<rect x="666" y="180" width="230" height="130" rx="6" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<text x="781" y="200" text-anchor="middle" font-family="Segoe UI,Arial" font-size="12" font-weight="600" fill="#000000">Validando</text>
+<line x1="666" y1="208" x2="896" y2="208" stroke="#333333" stroke-width="1"/>
+<text x="676" y="224" font-family="Segoe UI,Arial" font-size="10" fill="#333333">entry / iniciar validação dos dados</text>
+<text x="676" y="239" font-family="Segoe UI,Arial" font-size="10" fill="#333333">do / verificar campos obrigatórios</text>
+<text x="676" y="254" font-family="Segoe UI,Arial" font-size="10" fill="#333333">exit / consolidar resultado</text>
+<!-- separador transição interna -->
+<line x1="666" y1="264" x2="896" y2="264" stroke="#aaaaaa" stroke-width="0.8" stroke-dasharray="4,3"/>
+<text x="676" y="279" font-family="Segoe UI,Arial" font-size="10" fill="#666666">campoVazio / destacar campo inválido</text>
+
+<!-- Validando → Com Alerta (sobe diagonal direita) -->
+<line x1="896" y1="220" x2="980" y2="100" stroke="#333333" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="916" y="155" font-family="Segoe UI,Arial" font-size="9" fill="#333333">inconsistenciaDetectada()</text>
+
+<!-- Validando → Confirmada (desce diagonal direita) -->
+<line x1="896" y1="260" x2="980" y2="380" stroke="#333333" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="900" y="330" font-family="Segoe UI,Arial" font-size="9" fill="#333333">validacaoOk()</text>
+
+<!-- ═══════════════════════════
+     ESTADO: Com Alerta
+     x=980 y=40 w=220 h=110
+═══════════════════════════ -->
+<rect x="980" y="40" width="230" height="110" rx="6" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<text x="1095" y="62" text-anchor="middle" font-family="Segoe UI,Arial" font-size="12" font-weight="600" fill="#000000">Com Alerta</text>
+<line x1="980" y1="70" x2="1210" y2="70" stroke="#333333" stroke-width="1"/>
+<text x="990" y="87" font-family="Segoe UI,Arial" font-size="10" fill="#333333">entry / emitir alerta de inconsistência</text>
+<text x="990" y="102" font-family="Segoe UI,Arial" font-size="10" fill="#333333">do / notificar Carlos; aguardar revisão</text>
+<text x="990" y="117" font-family="Segoe UI,Arial" font-size="10" fill="#333333">exit / registrar alerta no log</text>
+
+<!-- Com Alerta → Encerrada (desce) -->
+<line x1="1095" y1="150" x2="1095" y2="240" stroke="#333333" stroke-width="1.5" marker-end="url(#arr)"/>
+<text x="1100" y="200" font-family="Segoe UI,Arial" font-size="9" fill="#333333">revisadoPorCarlos()</text>
+
+<!-- ═══════════════════════════
+     ESTADO: Confirmada
+     x=980 y=380 w=220 h=110
+═══════════════════════════ -->
+<rect x="980" y="380" width="230" height="110" rx="6" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<text x="1095" y="400" text-anchor="middle" font-family="Segoe UI,Arial" font-size="12" font-weight="600" fill="#000000">Confirmada</text>
+<line x1="980" y1="408" x2="1210" y2="408" stroke="#333333" stroke-width="1"/>
+<text x="990" y="424" font-family="Segoe UI,Arial" font-size="10" fill="#333333">entry / armazenar venda com rastreabilidade</text>
+<text x="990" y="439" font-family="Segoe UI,Arial" font-size="10" fill="#333333">do / exibir confirmação ao Atendente</text>
+<text x="990" y="454" font-family="Segoe UI,Arial" font-size="10" fill="#333333">exit / atualizar histórico de vendas</text>
+
+<!-- Confirmada → Encerrada (sobe) -->
+<line x1="1095" y1="380" x2="1095" y2="360" stroke="#333333" stroke-width="1.5" marker-end="url(#arr)"/>
+
+<!-- ═══════════════════════════
+     ESTADO: Encerrada
+     x=980 y=240 w=220 h=110
+═══════════════════════════ -->
+<rect x="980" y="240" width="230" height="110" rx="6" fill="#ffffff" stroke="#333333" stroke-width="1.5"/>
+<text x="1095" y="260" text-anchor="middle" font-family="Segoe UI,Arial" font-size="12" font-weight="600" fill="#000000">Encerrada</text>
+<line x1="980" y1="268" x2="1210" y2="268" stroke="#333333" stroke-width="1"/>
+<text x="990" y="284" font-family="Segoe UI,Arial" font-size="10" fill="#333333">entry / gerar registro final no histórico</text>
+<text x="990" y="299" font-family="Segoe UI,Arial" font-size="10" fill="#333333">do / disponibilizar para relatórios</text>
+<text x="990" y="314" font-family="Segoe UI,Arial" font-size="10" fill="#333333">exit / arquivar venda definitivamente</text>
+
+<!-- Encerrada → Nó Final -->
+<line x1="1210" y1="295" x2="1222" y2="295" stroke="#333333" stroke-width="1.5" marker-end="url(#arr)"/>
+<circle cx="1232" cy="295" r="10" fill="#ffffff" stroke="#333333" stroke-width="2"/>
+<circle cx="1232" cy="295" r="6" fill="#333333"/>
+
+</svg>
+</div>
+</body>
+</html>
